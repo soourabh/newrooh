@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rooh's Kitchen</title>
+
+<!-- PREMIUM GOOGLE FONTS -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --cream:#f6efe4;
+  --rose:#b36f67;
+  --dark:#2f2f2f;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+  font-family:'Cormorant Garamond', serif;
+  background:var(--cream);
+  color:var(--dark);
+  line-height:1.7;
+  overflow-x:hidden;
+}
+
+/* NAV */
+nav{
+  height:70px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 60px;
+  background:var(--cream);
+  position:sticky;
+  top:0;
+  z-index:200;
+}
+
+.logo{
+  font-family:'Playfair Display', serif;
+  font-size:26px;
+  letter-spacing:2px;
+  cursor:pointer;
+}
+
+.menu-btn{
+  font-size:26px;
+  cursor:pointer;
+}
+
+/* MOBILE MENU */
+.mobile-menu{
+  position:fixed;
+  inset:0;
+  background:var(--cream);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  transform:translateY(-100%);
+  transition:.5s;
+  z-index:199;
+}
+
+.mobile-menu a{
+  font-size:36px;
+  margin:15px 0;
+  text-decoration:none;
+  color:var(--dark);
+  cursor:pointer;
+  transition:.3s;
+}
+
+.mobile-menu a:hover{
+  color:var(--rose);
+}
+
+.mobile-menu.active{
+  transform:translateY(0);
+}
+
+/* PAGE SECTIONS */
+.page{
+  display:none;
+  animation:fadeIn .5s;
+}
+
+.page.active{
+  display:block;
+}
+
+@keyframes fadeIn{
+  from{opacity:0}
+  to{opacity:1}
+}
+
+/* HERO */
+.hero img{
+  width:100%;
+  height:90vh;
+  object-fit:cover;
+}
+
+/* TEXT */
+.section{
+  max-width:900px;
+  margin:90px auto;
+  text-align:center;
+  padding:0 20px;
+}
+
+.section h1{
+  font-family:'Playfair Display', serif;
+  font-size:52px;
+  margin-bottom:20px;
+}
+
+.section p{
+  font-size:22px;
+  font-style:italic;
+}
+
+/* BUTTON */
+.btn{
+  display:inline-block;
+  margin-top:35px;
+  padding:14px 42px;
+  border:1px solid var(--rose);
+  color:var(--rose);
+  text-decoration:none;
+  border-radius:40px;
+  letter-spacing:1px;
+  transition:.3s;
+  cursor:pointer;
+}
+
+.btn:hover{
+  background:var(--rose);
+  color:#fff;
+}
+
+/* GRID */
+.grid{
+  max-width:1200px;
+  margin:80px auto;
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:40px;
+  padding:0 40px;
+}
+
+.grid img{
+  width:100%;
+  height:400px;
+  object-fit:cover;
+  border:2px solid var(--rose);
+}
+
+/* COLOR BLOCK */
+.color{
+  background:var(--rose);
+  color:#fff;
+  padding:120px 20px;
+  text-align:center;
+}
+
+.color h2{
+  font-family:'Playfair Display', serif;
+  font-size:56px;
+  margin-bottom:25px;
+}
+
+.color p{
+  font-size:22px;
+  max-width:900px;
+  margin:auto;
+}
+
+/* EVENTS */
+.events{
+  max-width:1200px;
+  margin:80px auto;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:30px;
+  padding:0 40px;
+}
+
+.events img{
+  width:100%;
+  height:260px;
+  object-fit:cover;
+  border:2px solid #fff;
+}
+
+/* MENU ITEMS */
+.menu-section{
+  max-width:1000px;
+  margin:60px auto;
+  padding:0 40px;
+}
+
+.menu-category{
+  margin-bottom:60px;
+}
+
+.menu-category h2{
+  font-family:'Playfair Display', serif;
+  font-size:42px;
+  color:var(--rose);
+  margin-bottom:30px;
+  text-align:center;
+}
+
+.menu-item{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:25px;
+  padding-bottom:15px;
+  border-bottom:1px solid #ddd;
+}
+
+.menu-item-info h3{
+  font-family:'Playfair Display', serif;
+  font-size:24px;
+  margin-bottom:8px;
+}
+
+.menu-item-info p{
+  font-size:18px;
+  color:#666;
+}
+
+.menu-item-price{
+  font-size:22px;
+  color:var(--rose);
+  font-weight:600;
+}
+
+/* CATERING PACKAGES */
+.package-card{
+  background:#fff;
+  border:2px solid var(--rose);
+  padding:40px;
+  margin-bottom:40px;
+  border-radius:8px;
+}
+
+.package-card h3{
+  font-family:'Playfair Display', serif;
+  font-size:36px;
+  color:var(--rose);
+  margin-bottom:15px;
+}
+
+.package-card .price{
+  font-size:28px;
+  color:var(--dark);
+  margin-bottom:20px;
+}
+
+.package-card ul{
+  list-style:none;
+  margin:20px 0;
+}
+
+.package-card ul li{
+  font-size:20px;
+  padding:8px 0;
+  padding-left:25px;
+  position:relative;
+}
+
+.package-card ul li:before{
+  content:"✓";
+  position:absolute;
+  left:0;
+  color:var(--rose);
+  font-weight:bold;
+}
+
+/* BOOKING FORM */
+.booking-form{
+  max-width:700px;
+  margin:60px auto;
+  padding:0 40px;
+}
+
+.form-group{
+  margin-bottom:25px;
+}
+
+.form-group label{
+  display:block;
+  font-size:20px;
+  margin-bottom:10px;
+  font-family:'Playfair Display', serif;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select{
+  width:100%;
+  padding:14px;
+  border:1px solid var(--rose);
+  background:transparent;
+  font-size:18px;
+  font-family:'Cormorant Garamond', serif;
+  border-radius:4px;
+}
+
+.form-group textarea{
+  min-height:120px;
+  resize:vertical;
+}
+
+/* STORY PAGE */
+.story-content{
+  max-width:900px;
+  margin:60px auto;
+  padding:0 40px;
+}
+
+.story-content p{
+  font-size:22px;
+  margin-bottom:25px;
+  text-align:justify;
+}
+
+.story-image{
+  width:100%;
+  max-width:800px;
+  margin:40px auto;
+  display:block;
+  border:3px solid var(--rose);
+}
+
+/* FOOTER */
+footer{
+  padding:100px 40px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:40px;
+}
+
+footer h3{
+  font-family:'Playfair Display', serif;
+  font-size:34px;
+  margin-bottom:20px;
+}
+
+footer > div:nth-child(2){
+  text-align:center;
+}
+
+footer > div:nth-child(3){
+  text-align:right;
+}
+
+input.footer-input{
+  width:100%;
+  padding:14px;
+  border:none;
+  border-bottom:1px solid var(--rose);
+  background:transparent;
+  margin-top:20px;
+  font-size:16px;
+}
+
+/* WHATSAPP FLOAT */
+.whatsapp{
+  position:fixed;
+  bottom:30px;
+  right:30px;
+  background:#25D366;
+  color:#fff;
+  padding:16px 22px;
+  border-radius:50px;
+  font-size:18px;
+  text-decoration:none;
+  z-index:300;
+}
+
+/* ANIMATIONS */
+.fade{
+  opacity:0;
+  transform:translateY(40px);
+  transition:1s;
+}
+
+.fade.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .grid,.events,footer{
+    grid-template-columns:1fr;
+  }
+  nav{padding:0 25px}
+  .menu-item{flex-direction:column}
+  .menu-item-price{margin-top:10px}
+  .section h1{font-size:36px}
+  .color h2{font-size:42px}
+  footer > div:nth-child(2),
+  footer > div:nth-child(3){
+    text-align:left;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobile-nav">
+  <a onclick="showPage('home')">Home</a>
+  <a onclick="showPage('menu')">Menu</a>
+  <a onclick="showPage('catering')">Catering Packages</a>
+  <a onclick="showPage('booking')">Book Us</a>
+  <a onclick="showPage('story')">Our Story</a>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="logo" onclick="showPage('home')">ROOH</div>
+  <div class="menu-btn" onclick="toggleMenu()">☰</div>
+</nav>
+
+<!-- HOME PAGE -->
+<div id="home" class="page active">
+  <!-- HERO -->
+  <section class="hero">
+    <img src="hero.png">
+  </section>
+
+  <!-- INTRO -->
+  <section class="section fade">
+    <h1>Situated in the heart of the city, Rooh's Kitchen is a soulful culinary escape.</h1>
+    <p>
+      Indulge in warm hospitality, refined flavors,
+      and moments crafted to be remembered.
+    </p>
+    <a class="btn" onclick="showPage('booking')">RESTAURANT RESERVATIONS</a>
+  </section>
+
+  <!-- GRID -->
+  <section class="grid fade">
+    <img src="https://images.unsplash.com/photo-1750767396956-da1796f33ad1?q=80&w=996&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+    <img src="https://images.unsplash.com/photo-1694849789325-914b71ab4075?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+    <img src="https://images.unsplash.com/photo-1630409346824-4f0e7b080087?q=80&w=946&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+    <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?q=80&w=1071&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+  </section>
+
+  <!-- EVENTS -->
+  <section class="color fade">
+    <h2>Exclusive Events</h2>
+    <p>
+      Let conversations, celebrations and curated experiences
+      unfold in the inviting embrace of Rooh's Kitchen.
+    </p>
+    <a class="btn" onclick="showPage('catering')">VIEW PACKAGES</a>
+  </section>
+
+  <section class="events fade">
+    <img src="https://images.unsplash.com/photo-1644150667853-d2ddead92129?q=80&w=1248&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+    <img src="https://images.unsplash.com/photo-1685478566051-8e5c5af68a58?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+    <img src="https://images.unsplash.com/photo-1626186241349-5d5f44407f55?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+  </section>
+
+  <!-- DINING -->
+  <section class="section fade">
+    <h1>Alluring Dining Spaces</h1>
+    <p>
+      Thoughtfully designed interiors that elevate every meal
+      into an experience of comfort and elegance.
+    </p>
+    <a class="btn" onclick="showPage('menu')">VIEW MENU</a>
+  </section>
+</div>
+
+<!-- MENU PAGE -->
+<div id="menu" class="page">
+  <section class="hero">
+    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=1170&auto=format&fit=crop">
+  </section>
+
+  <section class="section">
+    <h1>Our Menu</h1>
+    <p>A celebration of authentic Indian flavors with a contemporary twist</p>
+  </section>
+
+  <div class="menu-section">
+    <div class="menu-category">
+      <h2>Appetizers & Starters</h2>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <h3>Paneer Tikka</h3>
+          <p>Cottage cheese marinated in spices, grilled to perfection</p>
+        </div>
+        <div class="menu-item-price">₹380</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <h3>Tandoori Mushroom</h3>
+          <p>Button mushrooms with aromatic herbs and tandoori spices</p>
+        </div>
+        <div class="menu-item-price">₹320</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <h3>Crispy Lotus Stem</h3>
+          <p>Thinly sliced lotus stem, perfectly spiced and fried</p>
+        </div>
+        <div class="menu-item-price">₹350</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <h3>Hara Bhara Kabab</h3>
+          <p>Spinach and green pea patties with mint chutney</p>
+        </div>
+        <div class="menu-item-price">₹340</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <h3>Malai Chaap</h3>
+          <p>Soya chaap marinated in cream and spices, chargrilled</p>
+        </div>
+        <div class="menu-item-price">₹390</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <h3>Corn Seekh</h3>
+          <p>Sweet corn and cottage cheese kebabs with Indian spices</p>
+        </div>
+        <div class="menu-item-price">₹360</div>
+      </div>
+    </div>
+
+    <div class="menu-category">
+      <h2>Soups & Salads</h2>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <h3>Tomato Shorba</h3>
+          <p>Classic Indian tomato soup with aromatic spices</p>
+        </div>
+        <div class="menu-item-price">₹220</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <h3>Sweet Corn Soup</h3>
+          <p>Creamy sweet corn with vegetable julienne</p>
+        </div>
+        <div class="menu-item-price">₹240</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <h3>Rooh's Garden Salad</h3>
+          <p>Fresh greens, pomegranate, walnuts with honey-lime dressing</p>
+        </div>
+        <div class="menu-item-price">₹280</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <h3>Kachumber Salad</h3>
+          <p>Diced cucumber, tomato, onion with lemon and chaat masala</p>
+        </div>
+        <div class="menu-item-price">₹180</div>
+      </div>
+    </div>
+
+    <div class="menu-category">
+      <h2>Main Course - Curries</h2>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <h3>Dal Makhani</h3>
+          <p>Black lentils slow-cooked with butter and cream</p>
+        </div>
+        <div class="menu-item-price">₹420</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <h3>Palak Paneer</h3>
+          <p>Cottage cheese in creamy spinach gravy</p>
+        </div>
+        <div class="menu-item-price">₹450</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <h3>Paneer Butter Masala</h3>
+          <p>Cottage cheese in rich tomato and cashew gravy</p>
+        </div>
+        <div class="menu-item-price">₹480</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <h3>Malai Kofta</h3>
+          <p>Cottage cheese and potato dumplings in creamy sauce</p>
+        </div>
+        <div class="menu-item-price">₹470</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <h3>Kadhai Paneer</h3>
+          <p>Cottage cheese with bell peppers in spicy tomato gravy</p>
+        </div>
+        <div class="menu-item-price">₹460</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <h3>Shahi Paneer</h3>
+          <p>Royal cottage cheese curry with nuts and saffron</p>
+        </div>
+        <div class="menu-item-price">₹490</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <h3>Mixed Vegetable Curry</h3>
+          <p>Seasonal vegetables in aromatic onion-tomato gravy</p>
+        </div>
+        <div class="menu-item-price">₹400</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <h3>Baingan Bharta</h3>
+          <p>Smoky roasted eggplant mash with spices</p>
+        </div>
+        <div class="menu-item-price">₹380</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <h3>Bhindi Masala</h3>
+          <p>Crispy okra sautéed with onions and spices</p>
+        </div>
+        <div class="menu-item-price">₹360</div>
+      </div>
+    </div>
+
+    <div class="menu-category">
+      <h2>Rice & Biryani</h2>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <h3>Hyderabadi Biryani</h3>
+          <p>Fragrant basmati rice layered with vegetables and aromatic spices</p>
+        </div>
+        <div class="menu-item-price">₹520</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <h3>Paneer Biryani</h3>
+          <p>Cottage cheese biryani with saffron and fried onions</p>
+        </div>
+        <div class="menu-item-price">₹560</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <h3>Kashmiri Pulao</h3>
+          <p>Basmati rice with dried fruits, nuts and saffron</p>
+        </div>
+        <div class="menu-item-price">₹380</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <h3>Jeera Rice</h3>
+          <p>Steamed basmati rice tempered with cumin</p>
+        </div>
+        <div class="menu-item-price">₹220</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <h3>Plain Steamed Rice</h3>
+          <p>Perfectly cooked basmati rice</p>
+        </div>
+        <div class="menu-item-price">₹180</div>
+      </div>
+    </div>
+
+    <div class="menu-category">
+      <h2>Breads</h2>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <h3>Butter Naan</h3>
+          <p>Soft leavened bread brushed with butter</p>
+        </div>
+        <div class="menu-item-price">₹80</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <h3>Garlic Naan</h3>
+          <p>Naan topped with fresh garlic and coriander</p>
+        </div>
+        <div class="menu-item-price">₹100</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <h3>Cheese Naan</h3>
+          <p>Naan stuffed with melted cheese</p>
+        </div>
+        <div class="menu-item-price">₹140</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <h3>Tandoori Roti</h3>
+          <p>Whole wheat bread baked in tandoor</p>
+        </div>
+        <div class="menu-item-price">₹60</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <h3>Laccha Paratha</h3>
+          <p>Multi-layered flaky whole wheat bread</p>
+        </div>
+        <div class="menu-item-price">₹90</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <h3>Stuffed Kulcha</h3>
+          <p>Bread stuffed with potato or paneer</p>
+        </div>
+        <div class="menu-item-price">₹120</div>
+      </div>
+    </div>
+
+    <div class="menu-category">
+      <h2>Accompaniments</h2>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <h3>Raita</h3>
+          <p>Yogurt with cucumber, tomato and spices</p>
+        </div>
+        <div class="menu-item-price">₹120</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <h3>Mixed Pickle</h3>
+          <p>Assorted Indian pickles</p>
+        </div>
+        <div class="menu-item-price">₹80</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <h3>Papad</h3>
+          <p>Crispy lentil wafers (2 pieces)</p>
+        </div>
+        <div class="menu-item-price">₹60</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <h3>Green Chutney</h3>
+          <p>Mint and coriander chutney</p>
+        </div>
+        <div class="menu-item-price">₹50</div>
+      </div>
+    </div>
+
+    <div class="menu-category">
+      <h2>Desserts</h2>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <h3>Gulab Jamun</h3>
+          <p>Golden fried dumplings soaked in rose-scented syrup</p>
+        </div>
+        <div class="menu-item-price">₹180</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <h3>Rasmalai</h3>
+          <p>Soft cottage cheese patties in saffron-infused milk</p>
+        </div>
+        <div class="menu-item-price">₹220</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <h3>Kulfi</h3>
+          <p>Traditional Indian ice cream with pistachio and cardamom</p>
+        </div>
+        <div class="menu-item-price">₹160</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <h3>Gajar Halwa</h3>
+          <p>Warm carrot pudding with nuts and ghee</p>
+        </div>
+        <div class="menu-item-price">₹200</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <h3>Phirni</h3>
+          <p>Rice pudding flavored with cardamom and saffron</p>
+        </div>
+        <div class="menu-item-price">₹190</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <h3>Jalebi with Rabri</h3>
+          <p>Crispy sweet spirals with thickened sweetened milk</p>
+        </div>
+        <div class="menu-item-price">₹210</div>
+      </div>
+    </div>
+
+    <div class="menu-category">
+      <h2>Beverages</h2>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <h3>Masala Chai</h3>
+          <p>Traditional Indian spiced tea</p>
+        </div>
+        <div class="menu-item-price">₹80</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <h3>Sweet Lassi</h3>
+          <p>Chilled yogurt drink</p>
+        </div>
+        <div class="menu-item-price">₹120</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <h3>Mango Lassi</h3>
+          <p>Yogurt blended with fresh mango pulp</p>
+        </div>
+        <div class="menu-item-price">₹150</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <h3>Fresh Lime Soda</h3>
+          <p>Fresh lime with soda, sweet or salted</p>
+        </div>
+        <div class="menu-item-price">₹100</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <h3>Jal Jeera</h3>
+          <p>Cumin-spiced refreshing drink</p>
+        </div>
+        <div class="menu-item-price">₹90</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <h3>Rooh Afza</h3>
+          <p>Rose syrup with milk</p>
+        </div>
+        <div class="menu-item-price">₹110</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <h3>Filter Coffee</h3>
+          <p>South Indian style filtered coffee</p>
+        </div>
+        <div class="menu-item-price">₹100</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <h3>Soft Drinks</h3>
+          <p>Coke, Sprite, Fanta, Thums Up</p>
+        </div>
+        <div class="menu-item-price">₹60</div>
+      </div>
+    </div>
+  </div>
+
+  <section class="color">
+    <h2>Reserve Your Table</h2>
+    <p>Experience the warmth of Rooh's Kitchen</p>
+    <a class="btn" onclick="showPage('booking')">BOOK NOW</a>
+  </section>
+</div>
+
+<!-- CATERING PAGE -->
+<div id="catering" class="page">
+  <section class="hero">
+    <img src="https://images.unsplash.com/photo-1555244162-803834f70033?q=80&w=1170&auto=format&fit=crop">
+  </section>
+
+  <section class="section">
+    <h1>Catering Packages</h1>
+    <p>Perfect celebrations deserve perfect culinary experiences</p>
+  </section>
+
+  <div class="menu-section">
+    <div class="package-card">
+      <h3>Classic Gathering</h3>
+      <div class="price">₹850 per person</div>
+      <p>Ideal for intimate gatherings of 20-50 guests</p>
+      <ul>
+        <li>3 Starter Options</li>
+        <li>4 Main Course Dishes</li>
+        <li>Assorted Breads & Rice</li>
+        <li>2 Dessert Varieties</li>
+        <li>Welcome Drinks</li>
+        <li>Professional Service Staff</li>
+      </ul>
+      <a class="btn" onclick="showPage('booking')">BOOK THIS PACKAGE</a>
+    </div>
+
+    <div class="package-card">
+      <h3>Royal Celebration</h3>
+      <div class="price">₹1,450 per person</div>
+      <p>Perfect for weddings and grand celebrations (50+ guests)</p>
+      <ul>
+        <li>5 Starter Options</li>
+        <li>6 Main Course Dishes</li>
+        <li>Live Pasta & Chaat Counter</li>
+        <li>Assorted Breads & Rice</li>
+        <li>3 Dessert Varieties</li>
+        <li>Welcome Drinks & Mocktails</li>
+        <li>Premium Decor Setup</li>
+        <li>Dedicated Event Manager</li>
+      </ul>
+      <a class="btn" onclick="showPage('booking')">BOOK THIS PACKAGE</a>
+    </div>
+
+    <div class="package-card">
+      <h3>Corporate Package</h3>
+      <div class="price">₹650 per person</div>
+      <p>Designed for business events and conferences</p>
+      <ul>
+        <li>2 Starter Options</li>
+        <li>3 Main Course Dishes</li>
+        <li>Breads & Rice</li>
+        <li>Tea/Coffee Station</li>
+        <li>1 Dessert Variety</li>
+        <li>Professional Service</li>
+        <li>Flexible Timing Options</li>
+      </ul>
+      <a class="btn" onclick="showPage('booking')">BOOK THIS PACKAGE</a>
+    </div>
+  </div>
+</div>
+
+<!-- BOOKING PAGE -->
+<div id="booking" class="page">
+  <section class="hero">
+    <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=1170&auto=format&fit=crop">
+  </section>
+
+  <section class="section">
+    <h1>Book Your Experience</h1>
+    <p>We look forward to hosting you at Rooh's Kitchen</p>
+  </section>
+
+  <div class="booking-form">
+    <form>
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" placeholder="Enter your name" required>
+      </div>
+
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" placeholder="your@email.com" required>
+      </div>
+
+      <div class="form-group">
+        <label>Phone Number</label>
+        <input type="tel" placeholder="+91 XXXXX XXXXX" required>
+      </div>
+
+      <div class="form-group">
+        <label>Event Type</label>
+        <select required>
+          <option>Dine-In Reservation</option>
+          <option>Private Dining Event</option>
+          <option>Catering - Classic Gathering</option>
+          <option>Catering - Royal Celebration</option>
+          <option>Catering - Corporate Package</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Date</label>
+        <input type="date" required>
+      </div>
+
+      <div class="form-group">
+        <label>Number of Guests</label>
+        <input type="number" placeholder="Number of people" min="1" required>
+      </div>
+
+      <div class="form-group">
+        <label>Special Requests</label>
+        <textarea placeholder="Any dietary requirements or special requests..."></textarea>
+      </div>
+
+      <button type="submit" class="btn">SUBMIT BOOKING REQUEST</button>
+    </form>
+  </div>
+
+  <section class="color">
+    <h2>Need Immediate Assistance?</h2>
+    <p>Our team is here to help you plan the perfect event</p>
+    <a class="whatsapp" href="https://wa.me/91XXXXXXXXXX" target="_blank" style="position:static;bottom:auto;right:auto;margin:20px auto;display:inline-block">Contact on WhatsApp</a>
+  </section>
+</div>
+
+<!-- OUR STORY PAGE -->
+<div id="story" class="page">
+  <section class="hero">
+    <img src="https://images.unsplash.com/photo-1543353071-10c8ba85a904?q=80&w=1170&auto=format&fit=crop">
+  </section>
+
+  <section class="section">
+    <h1>Our Story</h1>
+    <p>Where tradition meets contemporary culinary artistry</p>
+  </section>
+
+  <div class="story-content">
+    <p>
+      Rooh's Kitchen was born from a simple yet profound vision: to create a space where the soul of Indian cuisine could flourish in a contemporary setting. The word "Rooh" means soul in Hindi, and it represents everything we stand for – cooking with heart, serving with passion, and creating memories that touch the soul.
+    </p>
+
+    <img class="story-image" src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?q=80&w=1170&auto=format&fit=crop" alt="Kitchen">
+
+    <p>
+      Our journey began in 2018 when our founder, inspired by generations of family recipes and a deep love for Indian culinary traditions, decided to open a restaurant that would bridge the gap between authentic flavors and modern dining experiences. What started as a small intimate dining space has blossomed into a beloved destination for food lovers across the city.
+    </p>
+
+    <p>
+      At Rooh's Kitchen, we believe that every dish tells a story. Our chefs meticulously source the finest ingredients, honoring traditional cooking techniques while infusing contemporary creativity. From our signature Dal Makhani that simmers for hours to achieve the perfect creamy texture, to our innovative fusion dishes that surprise and delight – every plate is a labor of love.
+    </p>
+
+    <img class="story-image" src="https://images.unsplash.com/photo-1600565193348-f74bd3c7ccdf?q=80&w=1170&auto=format&fit=crop" alt="Spices">
+
+    <p>
+      We take pride in creating not just meals, but experiences. Whether you're joining us for an intimate dinner, celebrating a milestone, or hosting a grand event, our team is dedicated to making every moment special. Our catering services extend the warmth of Rooh's Kitchen to your chosen venue, bringing the same attention to detail and culinary excellence that defines our restaurant.
+    </p>
+
+    <p>
+      Today, Rooh's Kitchen stands as a testament to the power of passion, dedication, and the universal language of good food. We invite you to become part of our story, to share a meal with us, and to experience the soul of Indian cuisine in every bite.
+    </p>
+  </div>
+
+  <section class="color">
+    <h2>Visit Us Today</h2>
+    <p>Experience the Rooh difference for yourself</p>
+    <a class="btn" onclick="showPage('booking')">MAKE A RESERVATION</a>
+  </section>
+</div>
+
+<!-- FOOTER -->
+<footer class="fade">
+  <div>
+    <h3>ROOH<br>Newsletter</h3>
+    <p>Be first to know about special menus & events.</p>
+    <input class="footer-input" placeholder="Email Address">
+    <a class="btn" href="#">JOIN OUR COMMUNITY</a>
+  </div>
+
+  <div>
+    <h3>Rooh's Kitchen</h3>
+    <p>Modern Indian Cuisine</p>
+    <p>Private Dining & Events</p>
+  </div>
+
+  <div>
+    <h3>Contact</h3>
+    <p>📍 India</p>
+    <p>📞 +91 XXXXX XXXXX</p>
+  </div>
+</footer>
+
+<!-- WHATSAPP -->
+<a class="whatsapp" href="https://wa.me/91XXXXXXXXXX" target="_blank">WhatsApp</a>
+
+<script>
+function toggleMenu(){
+  document.getElementById('mobile-nav').classList.toggle('active');
+}
+
+function showPage(pageId){
+  // Hide all pages
+  const pages = document.querySelectorAll('.page');
+  pages.forEach(p => p.classList.remove('active'));
+  
+  // Show selected page
+  document.getElementById(pageId).classList.add('active');
+  
+  // Close menu
+  document.getElementById('mobile-nav').classList.remove('active');
+  
+  // Scroll to top
+  window.scrollTo(0, 0);
+  
+  // Re-observe fade elements
+  const faders = document.querySelectorAll('.fade');
+  faders.forEach(f => {
+    f.classList.remove('show');
+    obs.observe(f);
+  });
+}
+
+/* SCROLL ANIMATION */
+const faders=document.querySelectorAll('.fade');
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting)e.target.classList.add('show');
+  });
+},{threshold:.2});
+
+faders.forEach(f=>obs.observe(f));
+</script>
+
+</body>
+</html>
