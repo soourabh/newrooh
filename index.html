@@ -46,40 +46,147 @@ nav{
 }
 
 .menu-btn{
-  font-size:26px;
+  width:46px;
+  height:46px;
+  background:transparent;
+  border:none;
   cursor:pointer;
-}
-
-/* MOBILE MENU */
-.mobile-menu{
-  position:fixed;
-  inset:0;
-  background:var(--cream);
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
+  gap:7px;
+  padding:0;
+}
+
+.menu-btn span{
+  width:28px;
+  height:2px;
+  background:var(--dark);
+  border-radius:2px;
+  transition:transform .35s ease, opacity .25s ease, background .35s ease;
+  transform-origin:center;
+}
+
+/* Morph into ✕ */
+.menu-btn.open span:nth-child(1){
+  transform:translateY(9px) rotate(45deg);
+  background:var(--rose);
+}
+.menu-btn.open span:nth-child(2){
+  opacity:0;
+  transform:scaleX(0);
+}
+.menu-btn.open span:nth-child(3){
+  transform:translateY(-9px) rotate(-45deg);
+  background:var(--rose);
+}
+
+
+
+/* MOBILE MENU — premium editorial style */
+.mobile-menu{
+  position:fixed;
+  inset:0;
+
+  background:rgba(246,239,228,0.96); /* cream with slight transparency */
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+
+  gap:18px;
+  padding:120px 20px;
+
   transform:translateY(-100%);
-  transition:.5s;
+  transition:transform .5s ease;
   z-index:199;
-}
-
-.mobile-menu a{
-  font-size:36px;
-  margin:15px 0;
-  text-decoration:none;
-  color:var(--dark);
-  cursor:pointer;
-  transition:.3s;
-}
-
-.mobile-menu a:hover{
-  color:var(--rose);
 }
 
 .mobile-menu.active{
   transform:translateY(0);
 }
+
+/* NAV ITEMS — no boxes, luxury text */
+.mobile-menu a.nav-pill{
+  position:relative;
+  display:inline-block;
+
+  font-family:'Playfair Display', serif;
+  font-size:24px;
+  letter-spacing:2.5px;
+  text-transform:uppercase;
+
+  color:var(--dark);
+  text-decoration:none;
+  cursor:pointer;
+
+  padding:6px 10px;
+  transition: color .25s ease, transform .2s ease;
+}
+
+/* underline animation */
+.mobile-menu a.nav-pill::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  bottom:-6px;
+  width:0;
+  height:1px;
+  background:var(--rose);
+  transition: width .3s ease, left .3s ease;
+}
+
+.mobile-menu a.nav-pill:hover{
+  color:var(--rose);
+  transform:translateY(-1px);
+}
+
+.mobile-menu a.nav-pill:hover::after{
+  width:100%;
+  left:0;
+}
+
+/* Active page */
+.mobile-menu a.nav-pill.active{
+  color:var(--rose);
+}
+
+.mobile-menu a.nav-pill.active::after{
+  width:100%;
+  left:0;
+}
+
+/* Responsive */
+@media(max-width:900px){
+  .mobile-menu a.nav-pill{
+    font-size:20px;
+    letter-spacing:2.2px;
+  }
+}
+/* Stagger reveal on open */
+.mobile-menu a.nav-pill{
+  opacity:0;
+  transform:translateY(10px);
+}
+
+.mobile-menu.active a.nav-pill{
+  animation: menuIn .35s ease forwards;
+}
+
+.mobile-menu.active a.nav-pill:nth-child(1){ animation-delay:.05s; }
+.mobile-menu.active a.nav-pill:nth-child(2){ animation-delay:.10s; }
+.mobile-menu.active a.nav-pill:nth-child(3){ animation-delay:.15s; }
+.mobile-menu.active a.nav-pill:nth-child(4){ animation-delay:.20s; }
+.mobile-menu.active a.nav-pill:nth-child(5){ animation-delay:.25s; }
+
+@keyframes menuIn{
+  to{ opacity:1; transform:translateY(0); }
+}
+
 
 /* PAGE SECTIONS */
 .page{
@@ -376,12 +483,35 @@ input.footer-input{
   right:30px;
   background:#25D366;
   color:#fff;
-  padding:16px 22px;
-  border-radius:50px;
-  font-size:18px;
+  width:60px;
+  height:60px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:50%;
   text-decoration:none;
   z-index:300;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transition:0.3s;
 }
+
+.whatsapp:hover{
+  transform:scale(1.1);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+}
+
+.whatsapp svg{
+  width:36px;
+  height:36px;
+}
+
+/* WhatsApp icon (same style) but used inline in a section */
+.whatsapp-inline{
+  position: static;
+  margin: 24px auto 0;
+  display: inline-flex;
+}
+
 
 /* ANIMATIONS */
 .fade{
@@ -409,7 +539,46 @@ input.footer-input{
   footer > div:nth-child(3){
     text-align:left;
   }
+    /* ADD THESE TWO LINES */
+  .footer-logo{
+    margin:0 0 20px 0;
+  }
+  .footer-center-content{
+    align-items:flex-start;
+  }
 }
+/* Footer logo styling - ADD THIS */
+.footer-logo{
+  width:300px;
+  height:auto;
+  margin:0 auto 20px;
+  display:block;
+  object-fit:contain;
+}
+
+.footer-center-content{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  justify-content:center;
+}
+.footer-center-content h3,
+.footer-center-content p{
+  width:100%;
+  text-align:center;
+  margin-left:0;  /* ADD THIS */
+  margin-right:0;  /* ADD THIS */
+  padding-left:60px;
+}
+
+footer > div:nth-child(2){
+  text-align:center;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
 </style>
 </head>
 
@@ -417,17 +586,26 @@ input.footer-input{
 
 <!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobile-nav">
-  <a onclick="showPage('home')">Home</a>
-  <a onclick="showPage('menu')">Menu</a>
-  <a onclick="showPage('catering')">Catering Packages</a>
-  <a onclick="showPage('booking')">Book Us</a>
-  <a onclick="showPage('story')">Our Story</a>
+  <a class="nav-pill" data-page="home" onclick="showPage('home')">Home</a>
+  <a class="nav-pill" data-page="menu" onclick="showPage('menu')">Menu</a>
+  <a class="nav-pill" data-page="catering" onclick="showPage('catering')">Catering Packages</a>
+  <a class="nav-pill" data-page="booking" onclick="showPage('booking')">Book Us</a>
+  <a class="nav-pill" data-page="story" onclick="showPage('story')">Our Story</a>
 </div>
+
+
 
 <!-- NAV -->
 <nav>
-  <div class="logo" onclick="showPage('home')">ROOH</div>
-  <div class="menu-btn" onclick="toggleMenu()">☰</div>
+  <div class="logo" onclick="showPage('home')">
+    <img src="Final.png" alt="Rooh's Kitchen" style="height: 50px;">
+  </div>
+  <button class="menu-btn" id="menu-btn" onclick="toggleMenu()" aria-label="Menu" aria-expanded="false">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
 </nav>
 
 <!-- HOME PAGE -->
@@ -501,42 +679,42 @@ input.footer-input{
           <h3>Paneer Tikka</h3>
           <p>Cottage cheese marinated in spices, grilled to perfection</p>
         </div>
-        <div class="menu-item-price">₹380</div>
+        <div class="menu-item-price">$5.64</div>
       </div>
       <div class="menu-item">
         <div class="menu-item-info">
           <h3>Tandoori Mushroom</h3>
           <p>Button mushrooms with aromatic herbs and tandoori spices</p>
         </div>
-        <div class="menu-item-price">₹320</div>
+        <div class="menu-item-price">$4.75</div>
       </div>
       <div class="menu-item">
         <div class="menu-item-info">
           <h3>Crispy Lotus Stem</h3>
           <p>Thinly sliced lotus stem, perfectly spiced and fried</p>
         </div>
-        <div class="menu-item-price">₹350</div>
+        <div class="menu-item-price">$5.20</div>
       </div>
       <div class="menu-item">
         <div class="menu-item-info">
           <h3>Hara Bhara Kabab</h3>
           <p>Spinach and green pea patties with mint chutney</p>
         </div>
-        <div class="menu-item-price">₹340</div>
+        <div class="menu-item-price">$5.05</div>
       </div>
       <div class="menu-item">
         <div class="menu-item-info">
           <h3>Malai Chaap</h3>
           <p>Soya chaap marinated in cream and spices, chargrilled</p>
         </div>
-        <div class="menu-item-price">₹390</div>
+        <div class="menu-item-price">$5.79</div>
       </div>
       <div class="menu-item">
         <div class="menu-item-info">
           <h3>Corn Seekh</h3>
           <p>Sweet corn and cottage cheese kebabs with Indian spices</p>
         </div>
-        <div class="menu-item-price">₹360</div>
+        <div class="menu-item-price">$5.35</div>
       </div>
     </div>
 
@@ -547,28 +725,28 @@ input.footer-input{
           <h3>Tomato Shorba</h3>
           <p>Classic Indian tomato soup with aromatic spices</p>
         </div>
-        <div class="menu-item-price">₹220</div>
+        <div class="menu-item-price">$3.27</div>
       </div>
       <div class="menu-item">
         <div class="menu-item-info">
           <h3>Sweet Corn Soup</h3>
           <p>Creamy sweet corn with vegetable julienne</p>
         </div>
-        <div class="menu-item-price">₹240</div>
+        <div class="menu-item-price">$3.56</div>
       </div>
       <div class="menu-item">
         <div class="menu-item-info">
           <h3>Rooh's Garden Salad</h3>
           <p>Fresh greens, pomegranate, walnuts with honey-lime dressing</p>
         </div>
-        <div class="menu-item-price">₹280</div>
+        <div class="menu-item-price">$4.16</div>
       </div>
       <div class="menu-item">
         <div class="menu-item-info">
           <h3>Kachumber Salad</h3>
           <p>Diced cucumber, tomato, onion with lemon and chaat masala</p>
         </div>
-        <div class="menu-item-price">₹180</div>
+        <div class="menu-item-price">$2.67</div>
       </div>
     </div>
 
@@ -579,63 +757,63 @@ input.footer-input{
           <h3>Dal Makhani</h3>
           <p>Black lentils slow-cooked with butter and cream</p>
         </div>
-        <div class="menu-item-price">₹420</div>
+        <div class="menu-item-price">$6.24</div>
       </div>
       <div class="menu-item">
         <div class="menu-item-info">
           <h3>Palak Paneer</h3>
           <p>Cottage cheese in creamy spinach gravy</p>
         </div>
-        <div class="menu-item-price">₹450</div>
+        <div class="menu-item-price">$6.68</div>
       </div>
       <div class="menu-item">
         <div class="menu-item-info">
           <h3>Paneer Butter Masala</h3>
           <p>Cottage cheese in rich tomato and cashew gravy</p>
         </div>
-        <div class="menu-item-price">₹480</div>
+        <div class="menu-item-price">$7.13</div>
       </div>
       <div class="menu-item">
         <div class="menu-item-info">
           <h3>Malai Kofta</h3>
           <p>Cottage cheese and potato dumplings in creamy sauce</p>
         </div>
-        <div class="menu-item-price">₹470</div>
+        <div class="menu-item-price">$6.98</div>
       </div>
       <div class="menu-item">
         <div class="menu-item-info">
           <h3>Kadhai Paneer</h3>
           <p>Cottage cheese with bell peppers in spicy tomato gravy</p>
         </div>
-        <div class="menu-item-price">₹460</div>
+        <div class="menu-item-price">$6.83</div>
       </div>
       <div class="menu-item">
         <div class="menu-item-info">
           <h3>Shahi Paneer</h3>
           <p>Royal cottage cheese curry with nuts and saffron</p>
         </div>
-        <div class="menu-item-price">₹490</div>
+        <div class="menu-item-price">$7.28</div>
       </div>
       <div class="menu-item">
         <div class="menu-item-info">
           <h3>Mixed Vegetable Curry</h3>
           <p>Seasonal vegetables in aromatic onion-tomato gravy</p>
         </div>
-        <div class="menu-item-price">₹400</div>
+        <div class="menu-item-price">$5.94</div>
       </div>
       <div class="menu-item">
         <div class="menu-item-info">
           <h3>Baingan Bharta</h3>
           <p>Smoky roasted eggplant mash with spices</p>
         </div>
-        <div class="menu-item-price">₹380</div>
+        <div class="menu-item-price">$5.64</div>
       </div>
       <div class="menu-item">
         <div class="menu-item-info">
           <h3>Bhindi Masala</h3>
           <p>Crispy okra sautéed with onions and spices</p>
         </div>
-        <div class="menu-item-price">₹360</div>
+        <div class="menu-item-price">$5.35</div>
       </div>
     </div>
 
@@ -646,35 +824,35 @@ input.footer-input{
           <h3>Hyderabadi Biryani</h3>
           <p>Fragrant basmati rice layered with vegetables and aromatic spices</p>
         </div>
-        <div class="menu-item-price">₹520</div>
+        <div class="menu-item-price">$7.72</div>
       </div>
       <div class="menu-item">
         <div class="menu-item-info">
           <h3>Paneer Biryani</h3>
           <p>Cottage cheese biryani with saffron and fried onions</p>
         </div>
-        <div class="menu-item-price">₹560</div>
+        <div class="menu-item-price">$8.32</div>
       </div>
       <div class="menu-item">
         <div class="menu-item-info">
           <h3>Kashmiri Pulao</h3>
           <p>Basmati rice with dried fruits, nuts and saffron</p>
         </div>
-        <div class="menu-item-price">₹380</div>
+        <div class="menu-item-price">$5.64</div>
       </div>
       <div class="menu-item">
         <div class="menu-item-info">
           <h3>Jeera Rice</h3>
           <p>Steamed basmati rice tempered with cumin</p>
         </div>
-        <div class="menu-item-price">₹220</div>
+        <div class="menu-item-price">$3.27</div>
       </div>
       <div class="menu-item">
         <div class="menu-item-info">
           <h3>Plain Steamed Rice</h3>
           <p>Perfectly cooked basmati rice</p>
         </div>
-        <div class="menu-item-price">₹180</div>
+        <div class="menu-item-price">$2.67</div>
       </div>
     </div>
 
@@ -685,42 +863,42 @@ input.footer-input{
           <h3>Butter Naan</h3>
           <p>Soft leavened bread brushed with butter</p>
         </div>
-        <div class="menu-item-price">₹80</div>
+        <div class="menu-item-price">$1.19</div>
       </div>
       <div class="menu-item">
         <div class="menu-item-info">
           <h3>Garlic Naan</h3>
           <p>Naan topped with fresh garlic and coriander</p>
         </div>
-        <div class="menu-item-price">₹100</div>
+        <div class="menu-item-price">$1.49</div>
       </div>
       <div class="menu-item">
         <div class="menu-item-info">
           <h3>Cheese Naan</h3>
           <p>Naan stuffed with melted cheese</p>
         </div>
-        <div class="menu-item-price">₹140</div>
+        <div class="menu-item-price">$2.08</div>
       </div>
       <div class="menu-item">
         <div class="menu-item-info">
           <h3>Tandoori Roti</h3>
           <p>Whole wheat bread baked in tandoor</p>
         </div>
-        <div class="menu-item-price">₹60</div>
+        <div class="menu-item-price">$0.89</div>
       </div>
       <div class="menu-item">
         <div class="menu-item-info">
           <h3>Laccha Paratha</h3>
           <p>Multi-layered flaky whole wheat bread</p>
         </div>
-        <div class="menu-item-price">₹90</div>
+        <div class="menu-item-price">$1.34</div>
       </div>
       <div class="menu-item">
         <div class="menu-item-info">
           <h3>Stuffed Kulcha</h3>
           <p>Bread stuffed with potato or paneer</p>
         </div>
-        <div class="menu-item-price">₹120</div>
+        <div class="menu-item-price">$1.78</div>
       </div>
     </div>
 
@@ -731,28 +909,28 @@ input.footer-input{
           <h3>Raita</h3>
           <p>Yogurt with cucumber, tomato and spices</p>
         </div>
-        <div class="menu-item-price">₹120</div>
+        <div class="menu-item-price">$1.78</div>
       </div>
       <div class="menu-item">
         <div class="menu-item-info">
           <h3>Mixed Pickle</h3>
           <p>Assorted Indian pickles</p>
         </div>
-        <div class="menu-item-price">₹80</div>
+        <div class="menu-item-price">$1.19</div>
       </div>
       <div class="menu-item">
         <div class="menu-item-info">
           <h3>Papad</h3>
           <p>Crispy lentil wafers (2 pieces)</p>
         </div>
-        <div class="menu-item-price">₹60</div>
+        <div class="menu-item-price">$0.89</div>
       </div>
       <div class="menu-item">
         <div class="menu-item-info">
           <h3>Green Chutney</h3>
           <p>Mint and coriander chutney</p>
         </div>
-        <div class="menu-item-price">₹50</div>
+        <div class="menu-item-price">$0.74</div>
       </div>
     </div>
 
@@ -763,42 +941,42 @@ input.footer-input{
           <h3>Gulab Jamun</h3>
           <p>Golden fried dumplings soaked in rose-scented syrup</p>
         </div>
-        <div class="menu-item-price">₹180</div>
+        <div class="menu-item-price">$2.67</div>
       </div>
       <div class="menu-item">
         <div class="menu-item-info">
           <h3>Rasmalai</h3>
           <p>Soft cottage cheese patties in saffron-infused milk</p>
         </div>
-        <div class="menu-item-price">₹220</div>
+        <div class="menu-item-price">$3.27</div>
       </div>
       <div class="menu-item">
         <div class="menu-item-info">
           <h3>Kulfi</h3>
           <p>Traditional Indian ice cream with pistachio and cardamom</p>
         </div>
-        <div class="menu-item-price">₹160</div>
+        <div class="menu-item-price">$2.38</div>
       </div>
       <div class="menu-item">
         <div class="menu-item-info">
           <h3>Gajar Halwa</h3>
           <p>Warm carrot pudding with nuts and ghee</p>
         </div>
-        <div class="menu-item-price">₹200</div>
+        <div class="menu-item-price">$2.97</div>
       </div>
       <div class="menu-item">
         <div class="menu-item-info">
           <h3>Phirni</h3>
           <p>Rice pudding flavored with cardamom and saffron</p>
         </div>
-        <div class="menu-item-price">₹190</div>
+        <div class="menu-item-price">$2.82</div>
       </div>
       <div class="menu-item">
         <div class="menu-item-info">
           <h3>Jalebi with Rabri</h3>
           <p>Crispy sweet spirals with thickened sweetened milk</p>
         </div>
-        <div class="menu-item-price">₹210</div>
+        <div class="menu-item-price">$3.12</div>
       </div>
     </div>
 
@@ -809,56 +987,56 @@ input.footer-input{
           <h3>Masala Chai</h3>
           <p>Traditional Indian spiced tea</p>
         </div>
-        <div class="menu-item-price">₹80</div>
+        <div class="menu-item-price">$1.19</div>
       </div>
       <div class="menu-item">
         <div class="menu-item-info">
           <h3>Sweet Lassi</h3>
           <p>Chilled yogurt drink</p>
         </div>
-        <div class="menu-item-price">₹120</div>
+        <div class="menu-item-price">$1.78</div>
       </div>
       <div class="menu-item">
         <div class="menu-item-info">
           <h3>Mango Lassi</h3>
           <p>Yogurt blended with fresh mango pulp</p>
         </div>
-        <div class="menu-item-price">₹150</div>
+        <div class="menu-item-price">$2.23</div>
       </div>
       <div class="menu-item">
         <div class="menu-item-info">
           <h3>Fresh Lime Soda</h3>
           <p>Fresh lime with soda, sweet or salted</p>
         </div>
-        <div class="menu-item-price">₹100</div>
+        <div class="menu-item-price">$1.49</div>
       </div>
       <div class="menu-item">
         <div class="menu-item-info">
           <h3>Jal Jeera</h3>
           <p>Cumin-spiced refreshing drink</p>
         </div>
-        <div class="menu-item-price">₹90</div>
+        <div class="menu-item-price">$1.34</div>
       </div>
       <div class="menu-item">
         <div class="menu-item-info">
           <h3>Rooh Afza</h3>
           <p>Rose syrup with milk</p>
         </div>
-        <div class="menu-item-price">₹110</div>
+        <div class="menu-item-price">$1.63</div>
       </div>
       <div class="menu-item">
         <div class="menu-item-info">
           <h3>Filter Coffee</h3>
           <p>South Indian style filtered coffee</p>
         </div>
-        <div class="menu-item-price">₹100</div>
+        <div class="menu-item-price">$1.49</div>
       </div>
       <div class="menu-item">
         <div class="menu-item-info">
           <h3>Soft Drinks</h3>
           <p>Coke, Sprite, Fanta, Thums Up</p>
         </div>
-        <div class="menu-item-price">₹60</div>
+        <div class="menu-item-price">$0.89</div>
       </div>
     </div>
   </div>
@@ -884,7 +1062,7 @@ input.footer-input{
   <div class="menu-section">
     <div class="package-card">
       <h3>Classic Gathering</h3>
-      <div class="price">₹850 per person</div>
+      <div class="price">$12.62 per person</div>
       <p>Ideal for intimate gatherings of 20-50 guests</p>
       <ul>
         <li>3 Starter Options</li>
@@ -899,7 +1077,7 @@ input.footer-input{
 
     <div class="package-card">
       <h3>Royal Celebration</h3>
-      <div class="price">₹1,450 per person</div>
+      <div class="price">$21.53 per person</div>
       <p>Perfect for weddings and grand celebrations (50+ guests)</p>
       <ul>
         <li>5 Starter Options</li>
@@ -916,7 +1094,7 @@ input.footer-input{
 
     <div class="package-card">
       <h3>Corporate Package</h3>
-      <div class="price">₹650 per person</div>
+      <div class="price">$9.65 per person</div>
       <p>Designed for business events and conferences</p>
       <ul>
         <li>2 Starter Options</li>
@@ -993,7 +1171,25 @@ input.footer-input{
   <section class="color">
     <h2>Need Immediate Assistance?</h2>
     <p>Our team is here to help you plan the perfect event</p>
-    <a class="whatsapp" href="https://wa.me/91XXXXXXXXXX" target="_blank" style="position:static;bottom:auto;right:auto;margin:20px auto;display:inline-block">Contact on WhatsApp</a>
+    <a class="whatsapp whatsapp-inline" href="https://wa.me/91XXXXXXXXXX" target="_blank" aria-label="Contact on WhatsApp">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 175.216 175.552" width="32" height="32">
+    <defs>
+      <linearGradient id="b-inline" x1="85.915" x2="86.535" y1="32.567" y2="137.092" gradientUnits="userSpaceOnUse">
+        <stop offset="0" stop-color="#57d163"/>
+        <stop offset="1" stop-color="#23b33a"/>
+      </linearGradient>
+      <filter id="a-inline" width="1.115" height="1.114" x="-.057" y="-.057" color-interpolation-filters="sRGB">
+        <feGaussianBlur stdDeviation="3.531"/>
+      </filter>
+    </defs>
+
+    <path fill="#b3b3b3" d="m54.532 138.45 2.235 1.324c9.387 5.571 20.15 8.518 31.126 8.523h.023c33.707 0 61.139-27.426 61.153-61.135.006-16.335-6.349-31.696-17.895-43.251A60.75 60.75 0 0 0 87.94 25.983c-33.733 0-61.166 27.423-61.178 61.13a60.98 60.98 0 0 0 9.349 32.535l1.455 2.312-6.179 22.558zm-40.811 23.544L24.16 123.88c-6.438-11.154-9.825-23.808-9.821-36.772.017-40.556 33.021-73.55 73.578-73.55 19.681.01 38.154 7.669 52.047 21.572s21.537 32.383 21.53 52.037c-.018 40.553-33.027 73.553-73.578 73.553h-.032c-12.313-.005-24.412-3.094-35.159-8.954zm0 0" filter="url(#a-inline)"/>
+    <path fill="#fff" d="m12.966 161.238 10.439-38.114a73.42 73.42 0 0 1-9.821-36.772c.017-40.556 33.021-73.55 73.578-73.55 19.681.01 38.154 7.669 52.047 21.572s21.537 32.383 21.53 52.037c-.018 40.553-33.027 73.553-73.578 73.553h-.032c-12.313-.005-24.412-3.094-35.159-8.954z"/>
+    <path fill="url(#b-inline)" d="M87.184 25.227c-33.733 0-61.166 27.423-61.178 61.13a60.98 60.98 0 0 0 9.349 32.535l1.455 2.313-6.179 22.558 23.146-6.069 2.235 1.324c9.387 5.571 20.15 8.517 31.126 8.523h.023c33.707 0 61.14-27.426 61.153-61.135a60.75 60.75 0 0 0-17.895-43.251 60.75 60.75 0 0 0-43.235-17.928z"/>
+    <path fill="#fff" fill-rule="evenodd" d="M68.772 55.603c-1.378-3.061-2.828-3.123-4.137-3.176l-3.524-.043c-1.226 0-3.218.46-4.902 2.3s-6.435 6.287-6.435 15.332 6.588 17.785 7.506 19.013 12.718 20.381 31.405 27.75c15.529 6.124 18.689 4.906 22.061 4.6s10.877-4.447 12.408-8.74 1.532-7.971 1.073-8.74-1.685-1.226-3.525-2.146-10.877-5.367-12.562-5.981-2.91-.919-4.137.921-4.746 5.979-5.819 7.206-2.144 1.381-3.984.462-7.76-2.861-14.784-9.124c-5.465-4.873-9.154-10.891-10.228-12.73s-.114-2.835.808-3.751c.825-.824 1.838-2.147 2.759-3.22s1.224-1.84 1.836-3.065.307-2.301-.153-3.22-4.032-10.011-5.666-13.647"/>
+  </svg>
+</a>
+
   </section>
 </div>
 
@@ -1050,37 +1246,91 @@ input.footer-input{
     <a class="btn" href="#">JOIN OUR COMMUNITY</a>
   </div>
 
-  <div>
-    <h3>Rooh's Kitchen</h3>
-    <p>Modern Indian Cuisine</p>
-    <p>Private Dining & Events</p>
+
+  <div class="footer-center-content">
+  <img src="Final.png" alt="Rooh's Kitchen Logo" class="footer-logo">
+  <h3>Rooh's Kitchen</h3>
+  <p>Modern Indian Cuisine</p>
+  <p>Private Dining & Events</p>
   </div>
 
   <div>
     <h3>Contact</h3>
-    <p>📍 India</p>
+    <p>📍 Canada</p>
     <p>📞 +91 XXXXX XXXXX</p>
   </div>
 </footer>
 
 <!-- WHATSAPP -->
-<a class="whatsapp" href="https://wa.me/91XXXXXXXXXX" target="_blank">WhatsApp</a>
+<a class="whatsapp" href="https://wa.me/91XXXXXXXXXX" target="_blank">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 175.216 175.552" width="32" height="32">
+    <defs>
+      <linearGradient id="b" x1="85.915" x2="86.535" y1="32.567" y2="137.092" gradientUnits="userSpaceOnUse">
+        <stop offset="0" stop-color="#57d163"/>
+        <stop offset="1" stop-color="#23b33a"/>
+      </linearGradient>
+      <filter id="a" width="1.115" height="1.114" x="-.057" y="-.057" color-interpolation-filters="sRGB">
+        <feGaussianBlur stdDeviation="3.531"/>
+      </filter>
+    </defs>
+    <path fill="#b3b3b3" d="m54.532 138.45 2.235 1.324c9.387 5.571 20.15 8.518 31.126 8.523h.023c33.707 0 61.139-27.426 61.153-61.135.006-16.335-6.349-31.696-17.895-43.251A60.75 60.75 0 0 0 87.94 25.983c-33.733 0-61.166 27.423-61.178 61.13a60.98 60.98 0 0 0 9.349 32.535l1.455 2.312-6.179 22.558zm-40.811 23.544L24.16 123.88c-6.438-11.154-9.825-23.808-9.821-36.772.017-40.556 33.021-73.55 73.578-73.55 19.681.01 38.154 7.669 52.047 21.572s21.537 32.383 21.53 52.037c-.018 40.553-33.027 73.553-73.578 73.553h-.032c-12.313-.005-24.412-3.094-35.159-8.954zm0 0" filter="url(#a)"/>
+    <path fill="#fff" d="m12.966 161.238 10.439-38.114a73.42 73.42 0 0 1-9.821-36.772c.017-40.556 33.021-73.55 73.578-73.55 19.681.01 38.154 7.669 52.047 21.572s21.537 32.383 21.53 52.037c-.018 40.553-33.027 73.553-73.578 73.553h-.032c-12.313-.005-24.412-3.094-35.159-8.954z"/>
+    <path fill="url(#linearGradient1780)" d="M87.184 25.227c-33.733 0-61.166 27.423-61.178 61.13a60.98 60.98 0 0 0 9.349 32.535l1.455 2.312-6.179 22.559 23.146-6.069 2.235 1.324c9.387 5.571 20.15 8.518 31.126 8.524h.023c33.707 0 61.14-27.426 61.153-61.135a60.75 60.75 0 0 0-17.895-43.251 60.75 60.75 0 0 0-43.235-17.929z"/>
+    <path fill="url(#b)" d="M87.184 25.227c-33.733 0-61.166 27.423-61.178 61.13a60.98 60.98 0 0 0 9.349 32.535l1.455 2.313-6.179 22.558 23.146-6.069 2.235 1.324c9.387 5.571 20.15 8.517 31.126 8.523h.023c33.707 0 61.14-27.426 61.153-61.135a60.75 60.75 0 0 0-17.895-43.251 60.75 60.75 0 0 0-43.235-17.928z"/>
+    <path fill="#fff" fill-rule="evenodd" d="M68.772 55.603c-1.378-3.061-2.828-3.123-4.137-3.176l-3.524-.043c-1.226 0-3.218.46-4.902 2.3s-6.435 6.287-6.435 15.332 6.588 17.785 7.506 19.013 12.718 20.381 31.405 27.75c15.529 6.124 18.689 4.906 22.061 4.6s10.877-4.447 12.408-8.74 1.532-7.971 1.073-8.74-1.685-1.226-3.525-2.146-10.877-5.367-12.562-5.981-2.91-.919-4.137.921-4.746 5.979-5.819 7.206-2.144 1.381-3.984.462-7.76-2.861-14.784-9.124c-5.465-4.873-9.154-10.891-10.228-12.73s-.114-2.835.808-3.751c.825-.824 1.838-2.147 2.759-3.22s1.224-1.84 1.836-3.065.307-2.301-.153-3.22-4.032-10.011-5.666-13.647"/>
+  </svg>
+</a>
+<!-- <a class="whatsapp" href="https://wa.me/91XXXXXXXXXX" target="_blank">WhatsApp</a> -->
 
 <script>
-function toggleMenu(){
-  document.getElementById('mobile-nav').classList.toggle('active');
+
+let currentPageId = "home";
+
+function setActiveNav(pageId){
+  currentPageId = pageId;
+
+  const links = document.querySelectorAll("#mobile-nav .nav-pill");
+  links.forEach(a => a.classList.remove("active"));
+
+  const activeLink = document.querySelector(`#mobile-nav .nav-pill[data-page="${pageId}"]`);
+  if(activeLink) activeLink.classList.add("active");
 }
+
+
+function toggleMenu(){
+  const mobileNav = document.getElementById('mobile-nav');
+  const btn = document.getElementById('menu-btn');
+
+  mobileNav.classList.toggle('active');
+  btn.classList.toggle('open');
+  btn.setAttribute('aria-expanded', btn.classList.contains('open'));
+
+  // highlight current page whenever menu opens
+  if(mobileNav.classList.contains('active')){
+    setActiveNav(currentPageId);
+  }
+}
+
+
 
 function showPage(pageId){
   // Hide all pages
   const pages = document.querySelectorAll('.page');
   pages.forEach(p => p.classList.remove('active'));
+  setActiveNav(pageId);
+
   
   // Show selected page
   document.getElementById(pageId).classList.add('active');
   
+  
   // Close menu
   document.getElementById('mobile-nav').classList.remove('active');
+
+  const btn = document.getElementById('menu-btn');
+  btn.classList.remove('open');
+  btn.setAttribute('aria-expanded', 'false');
+
   
   // Scroll to top
   window.scrollTo(0, 0);
